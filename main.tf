@@ -6,9 +6,9 @@ locals {
   region = "ap-south-1"
 }
 
-module "dev" {
-    source = "./dev"
-}
+# module "dev" {
+#     source = "./dev"
+# }
 
 resource "aws_s3_bucket" "dodgyBucket" {
   bucket = "mybucket"
