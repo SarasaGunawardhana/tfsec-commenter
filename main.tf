@@ -6,9 +6,9 @@ locals {
   region = "ap-south-1"
 }
 
-module "dev" {
-    source = "./dev"
-}
+# module "dev" {
+#     source = "./dev"
+# }
 
 resource "aws_s3_bucket" "dodgyBucket" {
   bucket = "mybucket"
@@ -23,3 +23,15 @@ resource "aws_s3_bucket" "dodgyBucket" {
     }
   }
 }
+
+resource "aws_cloudwatch_log_group" "apache_bad" {
+  name              = "apache[${count.index + 1}]"
+  count             = "2"
+  retention_in_days = 15
+}
+
+resource "aws_security_group_rule" "my-rule" {
+    type = "ingress"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
