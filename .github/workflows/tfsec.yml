@@ -23,19 +23,14 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
 
-      - name: Run tfsec
-        uses: tfsec/tfsec-sarif-action@9a83b5c3524f825c020e356335855741fd02745f
-        with:
-          sarif_file: tfsec.sarif
-          
-          
       - uses: actions/setup-go@v3
         with:
           go-version: '>=1.17.0'
           
-      - run: |
-          go version
+      - name: Install tfsec
+        run: |
           go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
       
-      - run: |
-          tfsec --format json --out tfsec.json
+      - name: Run tfsec & output as Json
+        run: |
+          tfsec -s --format json --out tfsec.json
