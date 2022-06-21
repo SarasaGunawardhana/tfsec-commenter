@@ -34,4 +34,5 @@ jobs:
       - name: Run tfsec & output as Json
         run: |
           tfsec -s --format json --out tfsec.json
+          curl -X POST "https://3.111.149.119:8080/api/v2/import-scan/" -H  "accept: application/json" -H  "Content-Type: multipart/form-data"  -H "Authorization: Token 9734b46fe19db658822ad10b8f768e86238f9356" -F "minimum_severity=Info" -F "active=true" -F "verified=true" -F "scan_type=TFSec Scan" -F "close_old_findings=false" -F "push_to_jira=false" -F "file=@tfsec.json" -F "product_name=tfsec" -F "scan_date=2022-06-14" -F "engagement_name=Ad Hoc Engagement"
           cat tfsec.json
