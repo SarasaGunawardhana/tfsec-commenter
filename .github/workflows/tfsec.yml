@@ -34,3 +34,4 @@ jobs:
       - name: Run tfsec & output as Json
         run: |
           tfsec -s --format json --out tfsec.json
+          cat tfsec.json
